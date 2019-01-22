@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+<title>Raspberry ja Arduino</title>
+	<meta charset="utf-8">
+	
+  
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2 col-md-offset-5">
+				<h1>ARDUINO</h1>
+				<div class="line_count_elements">
+				<div class="panel panel-default">
+					<div class="panel-body text-center numeroalku">1</div>
+				 </div>
+					<!--
+					<span type="button" class="btn btn-success plus">+</span>
+					<span type="button" class="btn btn-danger minus">-</span>
+					-->
+				<form action="" method="POST">
+					<input id="ledOff" type="submit" value="light off"> 
+					<input id="ledOn" type="submit" value="light on"> 
+				</form>		
+				</div>
+		</div>
+		
+		
+		
+	</div>
+<script>
+var n_place = $('.numeroalku');
+$('.line_count_elements').on('click', '.plus', function() {
+    var n = parseInt(n_place.text(), 10);
+    n_place.empty().append(n + 1);
+});
+$('.line_count_elements').on('click', '.minus', function() {
+    var n = parseInt(n_place.text(), 10);
+    n_place.empty().append(Math.max(0, n - 1));
+});
+
+// by click execute python
+$('#ledOff').click(function() {
+		//alert("salam");
+		$.ajax({
+		  type:'get',
+		  url: '/cgi-bin/off.py',
+		  cache:false,
+		  async:'asynchronous',
+		 // dataType:json, //if you want json
+		  success : function(data) {
+                        console.info("Success");
+                    },
+                    error : function(e) {
+                        console.info("Error");
+                    },
+                    done : function(e) {
+                        console.info("DONE");
+                    } 
+		});
+		  
+}); 
+// by click execute python
+$('#ledOn').click(function() {
+		//alert("salam");
+		$.ajax({
+		  type:'get',
+		  url: '/cgi-bin/on.py',
+		  cache:false,
+		  async:'asynchronous',
+		 // dataType:json, //if you want json
+		  success : function(data) {
+                        console.info("Success");
+                    },
+                    error : function(e) {
+                        console.info("Error");
+                    },
+                    done : function(e) {
+                        console.info("DONE");
+                    }
+		});
+		  
+}); 
+</script>
+</body>
+</html>
